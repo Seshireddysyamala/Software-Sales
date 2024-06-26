@@ -37,3 +37,6 @@ The Software Sales Website is designed to showcase and sell software products. T
   - **softwares.js**: Handles software page functionality.
   - **analyitics.js**: Handles analytics page funtionality.
 - **images/**: Directory containing image assets.
+
+## Additional Information
+- This repository is the final, cleanly structured version. To view the main development repository, please visit: https://github.com/Seshireddysyamala/Software-Sales-Website
