@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4aacb9c22b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap">
+    <style>
+        .user-profile-box {
+            margin-top: 20px; /* Add margin to the top */
+            padding: 20px;
+            background-color: #1F2833;
+            border: 1px solid #66FCF1;
+            border-radius: 5px;
+        }
+
+        h1 {
+            margin-top: 20px; /* Add margin to the top */
+            margin-bottom: 20px; /* Add margin to the bottom */
+            color: #66FCF1;
+            text-align: center;
+        }
+
+        .profile-details p {
+            color: #C5C6C7;
+        }
+
+        .btn-logout {
+            background-color: #45A29E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+            .btn-logout:hover {
+                background-color: red;
+                color: #0B0C10;
+            }
+
+        .footer {
+            margin-top: 20px; /* Add margin to the top */
+        }
+
+        .navbar-line {
+            margin-bottom: 20px; /* Add margin to the bottom */
+        }
+    </style>
+    <script>
+        function checkLoginState() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn && window.location.pathname !== '/login.html' && window.location.pathname !== '/signup.html') {
+                window.location.href = 'login.html';
+            } else {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user) {
+                    document.getElementById('user-email').textContent = user.email;
+                    document.getElementById('login-link').style.display = 'none';
+                    document.getElementById('profile-link').style.display = 'block';
+                }
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        }
+
+        function updateCartCount() {
+            const cartCountElements = document.querySelectorAll('#cart-count');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElements.forEach(el => el.textContent = itemCount);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLoginState();
+            updateCartCount();
+        });
+    </script>
+</head>
+<body class="profile-page">
+    <div id="menu"></div>
+    <!-- Add this line below the navbar in your HTML -->
+    <div class="navbar-line"></div>
+    <main class="container mt-5">
+        <h1>Your Account</h1>
+        <div class="user-profile-box">
+            <div class="profile-details">
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+            </div>
+            <button class="btn btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2024 Software Sales. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://github.com/Seshireddysyamala/Software-Sales" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/seshi-reddy-syamala" target="_blank" style="color: white;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu').innerHTML = data;
+                checkLoginState();
+                updateCartCount();
+            })
+            .catch(error => console.error('Error loading menu:', error));
+    </script>
+</body>
+</html>

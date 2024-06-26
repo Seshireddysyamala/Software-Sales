@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4aacb9c22b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap">
+    <style>
+        h1 {
+            margin-top: 20px; /* Add margin to the top */
+            margin-bottom: 20px; /* Add margin to the bottom */
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 20px; /* Add margin to the top */
+        }
+
+        .analytics-box {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #1F2833;
+            border: 1px solid #66FCF1;
+            border-radius: 5px;
+        }
+
+            .analytics-box h2 {
+                margin-bottom: 20px;
+            }
+
+            .analytics-box p {
+                margin-bottom: 20px;
+            }
+
+        .gap {
+            margin-bottom: 20px; /* Adjust this value as needed */
+        }
+    </style>
+    <script>
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = itemCount;
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+
+        function checkLoginState() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('profile-link').style.display = 'block';
+            } else {
+                document.getElementById('login-link').style.display = 'block';
+                document.getElementById('profile-link').style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', checkLoginState);
+    </script>
+</head>
+<body>
+    <div id="menu" class="gap"></div>
+    <main class="container mt-5">
+        <h1>Sales Statistics</h1>
+        <section id="data-analytics" class="box">
+            <div class="analytics-box gap">
+                <h2>Sales Data (Bar Chart)</h2>
+                <canvas id="salesChart"></canvas>
+                <hr>
+                <p><strong>Description:</strong> This chart represents the sales figures for each software product over the past six months. It shows the comparison between different products and their sales performance.</p>
+            </div>
+            <div class="analytics-box gap">
+                <h2>Sales Distribution (Pie Chart)</h2>
+                <canvas id="salesPieChart"></canvas>
+                <hr>
+                <p><strong>Description:</strong> The pie chart illustrates the percentage distribution of total sales among the four software products. It helps in understanding the market share of each product.</p>
+            </div>
+            <div class="analytics-box gap">
+                <h2>Sales Trend (Line Chart)</h2>
+                <canvas id="salesLineChart"></canvas>
+                <hr>
+                <p><strong>Description:</strong> This line chart depicts the sales trends of the software products over the last six months. It provides insights into the sales growth or decline for each product.</p>
+            </div>
+            <div class="analytics-box gap">
+                <h2>Sales Data Table</h2>
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Windows 11</th>
+                            <th>Zoom</th>
+                            <th>GTA 6</th>
+                            <th>Microsoft Office</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>January</td><td>$5000</td><td>$7000</td><td>$6000</td><td>$8000</td></tr>
+                        <tr><td>February</td><td>$6000</td><td>$8000</td><td>$7000</td><td>$9000</td></tr>
+                        <tr><td>March</td><td>$7000</td><td>$9000</td><td>$8000</td><td>$10000</td></tr>
+                        <tr><td>April</td><td>$8000</td><td>$10000</td><td>$9000</td><td>$11000</td></tr>
+                        <tr><td>May</td><td>$9000</td><td>$11000</td><td>$10000</td><td>$12000</td></tr>
+                        <tr><td>June</td><td>$10000</td><td>$12000</td><td>$11000</td><td>$13000</td></tr>
+                    </tbody>
+                </table>
+                <hr>
+                <p><strong>Description:</strong> This table provides a detailed view of the monthly sales data for each software product. It includes the sales figures for the past six months.</p>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2024 Software Sales. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://github.com/Seshireddysyamala/Software-Sales" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/seshi-reddy-syamala" target="_blank" style="color: white;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu').innerHTML = data;
+                checkLoginState();
+            })
+            .catch(error => console.error('Error loading menu:', error));
+
+    function updateCartCount() {
+    const cartCount = document.getElementById('cart-count');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+    cartCount.textContent = itemCount;
+}
+
+document.addEventListener('DOMContentLoaded', checkLoginState);
+    </script>
+</body>
+</html>

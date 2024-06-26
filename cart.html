@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4aacb9c22b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #1F2833;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #66FCF1;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            text-align: center;
+        }
+
+        .close {
+            color: #45A29E;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #66FCF1;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal img {
+            border: 2px solid #66FCF1;
+            max-width: 100%;
+        }
+
+        .modal p {
+            color: white;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-top: 20px;
+        }
+
+            .empty-cart-message i {
+                font-size: 6rem;
+                display: block;
+                margin-bottom: 10px; /* Add margin to increase gap between icon and text */
+                color: orangered; /* Set the color of the cart icon */
+            }
+
+        .empty-cart-text {
+            color: white; /* Set the color of the empty cart text */
+            font-weight: bold; /* Make the text bold */
+        }
+
+        .additional-text {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #C5C6C7;
+            font-family: 'Brush Script MT', cursive; /* Set the font style */
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .cart-container {
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add margin to the container */
+            padding: 20px;
+            background-color: #1F2833;
+            border: 1px solid #66FCF1;
+            border-radius: 5px;
+            overflow-x: auto; /* Ensure horizontal overflow */
+        }
+
+        .continue-shopping-btn {
+            display: none; /* Hide the button by default */
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #45A29E;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            margin: 0 auto; /* Center the button */
+            display: block; /* Make it a block element */
+        }
+
+            .continue-shopping-btn:hover {
+                background-color: lawngreen;
+                color: #0B0C10;
+            }
+
+        h1 {
+            margin-top: 20px; /* Add margin to the top */
+            margin-bottom: 20px; /* Add margin to the bottom */
+            text-align: center;
+        }
+
+        .navbar-line {
+            margin-bottom: 20px; /* Add margin to the bottom */
+            border-bottom: 0.5px solid #C5C6C7; /* Add the 0.5px solid #c5c6c7 line */
+        }
+
+        .footer {
+            margin-top: 20px; /* Add margin to the top */
+        }
+
+        /* Ensure table is responsive */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            min-width: 600px; /* Ensure minimum width for table */
+        }
+    </style>
+</head>
+<body class="cart-page">
+    <div id="menu"></div>
+    <div class="navbar-line"></div>
+    <main class="container mt-5">
+        <h1>Cart</h1>
+        <div class="cart-container box table-responsive">
+            <p id="empty-cart-message" class="empty-cart-message" style="display: none;">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="empty-cart-text">Your cart is empty.</span>
+            </p>
+            <p id="additional-text" class="additional-text" style="display: none;">Add something to make me happy :)</p>
+            <button onclick="location.href='softwares.html'" class="continue-shopping-btn" id="continue-shopping-btn">Continue Shopping</button>
+            <table id="cart-table" class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-table-body">
+                    <!-- Cart items will be dynamically inserted here -->
+                </tbody>
+            </table>
+            <div id="cart-total-container">
+                <h3>Total: <span id="cart-total">$0.00</span></h3>
+            </div>
+            <div class="checkout-button-container text-right">
+                <button id="checkout-button" class="btn btn-success" onclick="proceedToCheckout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2024 Software Sales. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://github.com/Seshireddysyamala/Software-Sales" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/seshi-reddy-syamala" target="_blank" style="color: white;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- The Modal -->
+    <div id="constructionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img src="images/under-construction-example.png" alt="Under Construction">
+            <p><strong>Thank you for being patient!</strong><br><strong>We are still building the backend of this site and will be back shortly.</strong></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu').innerHTML = data;
+                checkLoginState();
+                updateCartCount(); // Ensure this function is called to update the cart count
+            })
+            .catch(error => console.error('Error loading menu:', error));
+
+        function proceedToCheckout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+            if (cart.length === 0) {
+                // Do nothing if cart is empty
+                showEmptyCartMessage();
+            } else if (!isLoggedIn) {
+                localStorage.setItem('redirectAfterLogin', 'cart.html');
+                window.location.href = 'login.html';
+            } else {
+                document.getElementById('constructionModal').style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('constructionModal').style.display = 'none';
+        }
+
+        function checkLoginState() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('profile-link').style.display = 'block';
+            } else {
+                document.getElementById('login-link').style.display = 'block';
+                document.getElementById('profile-link').style.display = 'none';
+            }
+        }
+
+        function updateCartCount() {
+            const cartCountElements = document.querySelectorAll('#cart-count');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElements.forEach(el => el.textContent = itemCount);
+
+            // Show the "Continue Shopping" button and empty cart message if the cart is empty
+            if (itemCount === 0) {
+                showEmptyCartMessage();
+            }
+        }
+
+        function showEmptyCartMessage() {
+            document.querySelector('.continue-shopping-btn').style.display = 'block';
+            document.querySelector('#empty-cart-message').style.display = 'block';
+            document.querySelector('#additional-text').style.display = 'block';
+        }
+
+        // Check if cart is empty on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                showEmptyCartMessage();
+            } else {
+                document.getElementById('continue-shopping-btn').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

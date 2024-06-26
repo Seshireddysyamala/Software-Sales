@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4aacb9c22b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap">
+    <style>
+        .profile-image {
+            margin-bottom: 20px;
+        }
+
+        .image-box {
+            border: 2px solid #66FCF1;
+            padding: 0px;
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .personal-details, .development-experience {
+            border: 1px solid #66FCF1;
+            padding: 20px;
+            border-radius: 10px;
+            color: #ffffff;
+        }
+
+            .personal-details p, .development-experience p, .development-experience ul {
+                text-align: left;
+            }
+
+        .centered-text {
+            text-align: center;
+            width: 100%;
+        }
+
+        .spaced-list {
+            padding-left: 20px;
+        }
+
+        .personal-details p.centered {
+            text-align: center;
+        }
+
+        .centered-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = itemCount;
+        }
+
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+
+        function checkLoginState() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('profile-link').style.display = 'block';
+            } else {
+                document.getElementById('login-link').style.display = 'block';
+                document.getElementById('profile-link').style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', checkLoginState);
+    </script>
+</head>
+<body>
+    <div id="menu"></div>
+    <main class="container mt-5">
+        <section id="about" class="box section-margin personal-details development-experience">
+            <div class="profile-image text-center">
+                <img src="images/passport.JPG" alt="Seshi Reddy Syamala" class="img-fluid image-box">
+            </div>
+            <h1 class="centered-text">SESHI REDDY SYAMALA</h1>
+            <p class="centered-text">Currently pursuing a Master's in Business Analytics and Information Systems at University of South Florida with one year of work experience as an IT Deployment Engineer.</p>
+            <hr>
+            <h2 class="box-heading">Software Sales - Development Experience</h2>
+            <p>While developing this website, I focused on creating a user-friendly interface using HTML, CSS, and JavaScript. The website is designed to provide an overview of software sales, display top deals, customer reviews, and company information.</p>
+            <p>Key highlights include:</p>
+            <ul class="spaced-list">
+                <li>Utilized Bootstrap for responsive design.</li>
+                <li>Incorporated Font Awesome icons for enhanced visual appeal.</li>
+                <li>Integrated real-world functionalities with efficient redirections and robust local storage management for the cart and login pages.</li>
+                <li>Applied a consistent color palette across the website for a cohesive look.</li>
+                <li>Used Chart.js for data visualizations in the Data Analytics section.</li>
+            </ul>
+            <p>The site is responsive and easy to navigate, ensuring a seamless user experience. All source code is available on my <a href="https://github.com/Seshireddysyamala/Software-Sales">GitHub repository</a>.</p>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2024 Software Sales. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://github.com/Seshireddysyamala/Software-Sales" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/seshi-reddy-syamala" target="_blank" style="color: white;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu').innerHTML = data;
+                checkLoginState();
+            })
+            .catch(error => console.error('Error loading menu:', error));
+    </script>
+</body>
+</html>

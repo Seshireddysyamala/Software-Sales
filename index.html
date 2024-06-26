@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Sales Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4aacb9c22b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&display=swap">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Brush+Script+MT&display=swap');
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+            .fade-in.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+                .fade-in.active.delay-1 {
+                    transition-delay: 0.5s;
+                }
+
+                .fade-in.active.delay-2 {
+                    transition-delay: 1s;
+                }
+
+                .fade-in.active.delay-3 {
+                    transition-delay: 1.5s;
+                }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="menu"></div>
+    </header>
+    <main>
+        <div class="combined-section fade-in" style="background: url('images/homepage.png') no-repeat center center; background-size: cover;">
+            <div class="overlay">
+                <h1 class="fade-in delay-1">Welcome to Software Sales</h1>
+                <p class="fade-in delay-2">"Your one-stop shop for the latest and greatest software deals"</p>
+                <h2 class="fade-in delay-3">Discover the Best Software Deals and Latest Releases</h2>
+            </div>
+        </div>
+        <div class="container mt-5 pt-5">
+            <div class="row section-margin justify-content-center">
+                <section id="latest-software" class="col-md-5 box text-center latest-software box-gap">
+                    <a href="softwares.html#latest-software-section" class="card-link">
+                        <h2>Latest Software</h2>
+                        <div class="card software-item">
+                            <img src="images/product.jpg" alt="Latest Software" class="img-fluid rounded">
+                            <div class="card-body">
+                                <p>Explore the newest software available on the market.</p>
+                            </div>
+                        </div>
+                    </a>
+                </section>
+                <section id="top-deals" class="col-md-5 box text-center top-deals box-gap">
+                    <a href="softwares.html#top-deals-section" class="card-link">
+                        <h2>Top Deals</h2>
+                        <div class="card software-item">
+                            <img src="images/654a478f1b2ac3a4f32c9fb6_BFCM Deals Blog 2023.png" alt="Top Deals" class="img-fluid rounded">
+                            <div class="card-body">
+                                <p>Check out the best deals on software to save money.</p>
+                            </div>
+                        </div>
+                    </a>
+                </section>
+            </div>
+            <section id="customer-reviews" class="box section-margin text-center customer-reviews box-gap">
+                <h2>Customer Reviews</h2>
+                <p>“Great selection of software and amazing deals! Highly recommend.” - John Doe</p>
+                <p>“The customer service is excellent, and the prices are unbeatable.” - Jane Smith</p>
+                <p>“A one-stop shop for all software needs. Very satisfied with my purchases.” - Mark Johnson</p>
+            </section>
+            <section id="about-company" class="box section-margin text-center about-company box-gap">
+                <h2>About Our Company</h2>
+                <p>At Software Sales, we are dedicated to providing the best software solutions at the most competitive prices. Our mission is to make high-quality software accessible to everyone, whether for personal use, educational purposes, or business needs. With a commitment to customer satisfaction, we strive to offer exceptional service, knowledgeable support, and an extensive selection of software products. Join us in discovering the latest software trends and top deals, and experience the difference with Software Sales.</p>
+            </section>
+            <section id="contact-us" class="box text-center contact-us-info box-gap">
+                <h2>Contact Us</h2>
+                <p>We'd like to send you more information. Leave us your name and how best to contact you, plus any comments or questions you may have about Software Sales. We look forward to hearing from you!</p>
+                <form id="contact-form">
+                    <div class="form-group text-left">
+                        <label for="name"><i class="fas fa-user"></i> Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group text-left">
+                        <label for="message"><i class="fas fa-comment"></i> Message</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+                <div id="form-message" class="mt-4"></div>
+                <hr>
+                <div class="contact-details mt-4">
+                    <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                    <p class="address-text">12345 Software Sales, University Dr, Tampa, Fl 33620, USA</p>
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p><a href="mailto:Softwaresales@ssr.com">Softwaresales@ssr.com</a></p>
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p><a href="tel:+18130006666">(813) 000-6666</a></p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="text-center">
+                <p>&copy; 2024 Software Sales. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://github.com/Seshireddysyamala/Software-Sales" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" style="color: white; margin-right: 15px;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/seshi-reddy-syamala" target="_blank" style="color: white;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu').innerHTML = data;
+                checkLoginState();
+                updateCartCount(); // Ensure this function is called to update the cart count
+            })
+            .catch(error => console.error('Error loading menu:', error));
+
+        // Handle form submission
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('form-message').innerText = 'Thank you for your message. We will get back to you shortly.';
+            document.getElementById('form-message').style.color = 'green';
+            document.getElementById('contact-form').reset();
+        });
+
+        // Smooth scrolling effect
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function checkLoginState() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('profile-link').style.display = 'block';
+            } else {
+                document.getElementById('login-link').style.display = 'block';
+                document.getElementById('profile-link').style.display = 'none';
+            }
+        }
+
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = itemCount;
+        }
+
+        document.addEventListener('DOMContentLoaded', checkLoginState);
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const elements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
+

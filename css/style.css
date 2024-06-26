@@ -1,0 +1,854 @@
+﻿/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* Use browser scrollbar */
+
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Oxanium', sans-serif; /* Set Oxanium as the default font */
+    line-height: 1.6;
+    background-color: #1F2833;
+    color: #C5C6C7;
+    min-height: 100vh;
+    padding-right: 2px; /* Adjust padding to avoid scrollbar overlap */
+}
+
+:root {
+    --primary-color: #45A29E; /* Teal green */
+    --palette-blue: #66FCF1; /* Palette blue */
+    --bg-color: #0B0C10;
+    --text-color: #C5C6C7;
+    --box-bg-color: #1F2833;
+    --footer-text-color: #ffffff;
+    --bright-yellow: #FFFF00; /* Bright yellow */
+}
+
+
+/* Navbar */
+header, .navbar {
+    background-color: var(--primary-color); /* Teal green background */
+    color: #ffffff;
+    padding: 0.5rem 1rem; /* Adjusted padding for better appearance */
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0; /* Ensures the navbar is aligned to the left */
+    z-index: 1000;
+    width: 100%; /* Default to full width */
+}
+
+@media (min-width: 992px) {
+    header, .navbar {
+        width: calc(100% - 52px); /* Adjusted width to avoid overlapping scrollbar for desktop view */
+    }
+}
+
+.navbar-border-bottom {
+    border-bottom: 0.5px solid #c5c6c7; /* Grey line at the bottom */
+}
+
+/* Exclude border-bottom on profile and cart pages */
+body:not(.profile-page):not(.cart-page) .navbar {
+    border-bottom: 0.5px solid #c5c6c7; /* Grey line at the bottom */
+}
+
+.navbar-brand,
+.navbar-brand:hover,
+.navbar-brand:focus {
+    color: #66FCF1 !important;
+    font-weight: bold; /* Make Software Sales bold */
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+    .navbar-nav .nav-item {
+        margin: 0 1rem;
+    }
+
+        .navbar-nav .nav-item .nav-link {
+            font-weight: bold;
+            color: #FFFFFF;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+            .navbar-nav .nav-item .nav-link i {
+                margin-right: 7px;
+                vertical-align: middle;
+            }
+
+            .navbar-nav .nav-item .nav-link span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .navbar-nav .nav-item .nav-link.active,
+            .navbar-nav .nav-item .nav-link:hover,
+            .navbar-nav .nav-item .nav-link:focus {
+                color: var(--box-bg-color);
+                background-color: var(--palette-blue); /* Palette blue on hover */
+            }
+/* Grey line below the navbar */
+.navbar-line {
+    width: 100%;
+    height: 0.5px; /* Adjust the height as needed */
+    background-color: #c5c6c7; /* Grey color */
+    position: fixed;
+    top: 62px; /* Adjust based on the height of your navbar */
+    left: 0;
+    z-index: 999; /* Ensure it appears above other elements */
+}
+
+/* Responsive adjustments for mobile view */
+@media (max-width: 768px) {
+    header, .navbar {
+        padding: 1rem; /* Add padding to keep gap from edges */
+        width: calc(100% - 2rem); /* Ensure width minus padding */
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+        margin: 0 auto; /* Center the navbar */
+    }
+
+        .navbar-nav .nav-item {
+            margin: 0.5rem 0;
+        }
+
+            .navbar-nav .nav-item .nav-link {
+                padding: 0.5rem 1rem;
+            }
+}
+
+
+
+
+.fas.fa-home, .fas.fa-user {
+    position: relative;
+    top: -1px; /* Adjust this value as needed to align with the text */
+}
+
+#cart-count {
+    margin-left: 5px;
+}
+
+/* Main Styles */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0; /* Remove padding to stretch the content */
+    margin-top: 0; /* Remove top margin */
+    background-color: var(--box-bg-color);
+    color: var(--text-color);
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    border: none; /* Remove main border */
+    border-radius: 0;
+}
+
+/* Combined Section Styles */
+.combined-section {
+    background: url('images/homepage.png') no-repeat center center;
+    background-size: cover;
+    height: 600px; /* Increased height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    position: relative; /* Ensure it does not overlap content */
+    margin-top: 1rem; /* Add margin at the top to avoid overlaying */
+}
+
+    .combined-section .overlay {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2rem;
+        border-radius: 8px;
+        width: 100%; /* Ensure it covers the entire width */
+        height: 100%; /* Ensure it covers the entire height */
+        position: absolute; /* Ensure it overlays the entire section */
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .combined-section h1 {
+        color: #66fcf1; /* Palette blue */
+        font-size: 5rem; /* Larger size for h1 */
+        margin: 0 2rem 1rem 2rem; /* Add some margin for better spacing */
+        font-weight: bold; /* Default to bold */
+        font-family: 'Oxanium', sans-serif; /* Apply Oxanium font */
+    }
+
+    .combined-section h2 {
+        color: #FFA500; /* Different color for h2 */
+        font-size: 2.5rem; /* Smaller size for h2 */
+        margin: 1rem 2rem; /* Add some margin for better spacing */
+        font-weight: normal; /* Default to normal */
+        font-family: 'Brush Script MT', cursive; /* Apply Brush Script font */
+    }
+
+    .combined-section p {
+        color: #ffffff; /* Another color for p */
+        font-size: 1.25rem; /* Medium size for p */
+        margin: 1rem 1rem; /* Add some margin for better spacing */
+        font-style: italic; /* Default to italic */
+        font-family: 'Playfair Display', serif; /* Apply Playfair Display font */
+    }
+
+
+@media (max-width: 768px) {
+    .combined-section h1 {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+
+    .combined-section h2 {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .combined-section p {
+        font-size: 0.8rem; /* Adjust font size for smaller screens */
+    }
+}
+
+
+/* Section Styles */
+.container, .box, .banner, .software-item, .cart-container, .analytics-box, .section-box, .user-profile-box {
+    width: 100%;
+    max-width: none;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--box-bg-color);
+    box-sizing: border-box;
+}
+
+/* Section borders to keep */
+.latest-software, .top-deals, .customer-reviews, .about-company, .contact-us-info,
+#softwares .latest-software, #softwares .top-deals,
+#cart .cart-container,
+#analytics .analytics-box,
+#about-us .about-section {
+    border: 1px solid var(--primary-color) !important;
+}
+
+/* Remove border from main sections */
+.main-content {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.section-margin {
+    margin-bottom: 2rem;
+}
+
+h1, h2, h3 {
+    color: var(--palette-blue);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Add gap between headings and boxes in software page */
+#softwares h2 {
+    margin-bottom: 1rem;
+}
+
+/* Add gap between headings and boxes in analytics page */
+#analytics h2 {
+    margin-bottom: 1rem;
+}
+
+/* Apply border color for charts and table in analytics page */
+#analytics .chart-box, #analytics .data-table-box {
+    border: 1px solid var(--primary-color) !important;
+}
+
+/* Apply border color for "Your Cart" box */
+#cart .cart-container {
+    border: 1px solid var(--primary-color) !important;
+}
+
+
+/*footer styles*/
+.footer {
+    background: #1F2833; /* Footer background */
+    color: #ffffff; /* Bright white text */
+    text-align: center;
+    padding:0.5rem 0;
+    width: 100%;
+    margin-top: auto;
+    box-sizing: border-box;
+    border-top: 0.5px solid #c5c6c7; /* White border at the top */
+}
+
+    .footer .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+.social-icons a {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-right: 10px;
+    transition: color 0.3s;
+}
+
+    .social-icons a:hover {
+        color: #66FCF1;
+    }
+
+/* Responsive Navbar */
+@media (max-width: 992px) {
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+        .navbar-nav .nav-item {
+            margin: 0.5rem 0;
+        }
+
+            .navbar-nav .nav-item .nav-link {
+                padding: 0.5rem 1rem;
+            }
+}
+
+/* Software Section Styles */
+.row.section-margin {
+    margin-bottom: 2rem !important;
+}
+
+.software-item {
+    background-color: var(--box-bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem; /* Add space between items */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--primary-color) !important; /* Ensure border visibility with !important */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+    .software-item:hover {
+        transform: translateY(-10px);
+    }
+
+.latest-software img, .top-deals img {
+    width: 100%;
+    height: 300px; /* Ensure consistent height */
+    object-fit: cover;
+}
+
+.software-item h3 {
+    margin-bottom: 10px;
+    color: var(--palette-blue);
+}
+
+.software-item p {
+    margin-bottom: 10px;
+    color: #ffffff; /* Bright white text */
+    flex: 1; /* Allow paragraphs to take up available space */
+    text-align: center;
+}
+
+.software-item .price,
+.software-item .discounted-price {
+    font-weight: bold;
+}
+
+.software-item .price {
+    color: var(--bright-yellow); /* Bright yellow for original price */
+}
+
+.software-item .discounted-price {
+    color: red;
+}
+
+.software-item .btn {
+    margin-top: auto; /* Push button to the bottom */
+}
+
+/* Cart Section Styles */
+.cart-container {
+    background-color: var(--box-bg-color);
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    margin: 2rem auto;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    border: 1px solid var(--primary-color) !important;
+}
+
+    .cart-container h1 {
+        color: var(--palette-blue);
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.table {
+    color: var(--text-color);
+    width: 100%;
+    table-layout: auto; /* Auto layout for better responsiveness */
+    border-collapse: collapse; /* Collapsed borders for a cleaner look */
+}
+
+    .table th, .table td {
+        padding: 0.75rem;
+        text-align: center;
+        vertical-align: middle; /* Vertically center align text */
+        white-space: nowrap; /* Prevent text wrapping */
+        border: 1px solid var(--text-color);
+    }
+
+    .table th {
+        background-color: var(--bg-color);
+        font-weight: bold;
+        text-transform: uppercase; /* Uppercase text for headers */
+        color: var(--palette-blue);
+    }
+
+    .table td input[type="number"] {
+        text-align: center; /* Center the numbers */
+        width: 60px; /* Adjust width as needed */
+        margin: 0 auto; /* Center align input field */
+        display: block;
+        border: 1px solid var(--text-color); /* Border for inputs */
+        border-radius: 4px; /* Rounded corners for inputs */
+    }
+
+    .table td img {
+        max-width: 50px;
+        height: auto;
+        border-radius: 4px; /* Rounded corners for images */
+    }
+
+.text-right {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+    .text-right .btn-success {
+        display: block;
+        margin: 0 auto;
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 0.75rem 2rem; /* Increased padding for buttons */
+        font-size: 1rem; /* Larger font size for buttons */
+        border-radius: 4px; /* Rounded corners for buttons */
+    }
+
+.btn-success:hover {
+    background-color: #379287; /* Darker teal color on hover */
+    border-color: #379287; /* Darker teal color on hover */
+}
+
+.btn-danger {
+    background-color: #DC3545;
+    border-color: #DC3545;
+    padding: 0.5rem 1rem; /* Padding for remove buttons */
+    font-size: 0.875rem; /* Font size for remove buttons */
+    border-radius: 4px; /* Rounded corners for buttons */
+}
+
+    .btn-danger:hover {
+        background-color: #c82333; /* Darker red on hover */
+        border-color: #bd2130; /* Darker red on hover */
+    }
+
+.btn-logout {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-logout:hover {
+        background-color: #c82333; /* Darker red on hover */
+        border-color: #bd2130; /* Darker red on hover */
+    }
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .quantity-controls button {
+        background-color: #66FCF1;
+        color: #1F2833;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .quantity-controls button:hover {
+            background-color: #45A29E;
+        }
+
+    .quantity-controls input[type="number"] {
+        text-align: center;
+        width: 60px;
+        border: none;
+        margin: 0 0.5rem;
+    }
+
+.product-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Add gap between image and text */
+}
+
+    .product-details img {
+        flex-shrink: 0;
+        margin-right: 10px; /* Add margin to right of image */
+    }
+
+    .product-details span {
+        display: flex;
+        align-items: center;
+    }
+
+/* Responsive Cart Section */
+@media (max-width: 768px) {
+    .cart-container {
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+
+    .table-responsive {
+        margin-bottom: 1rem; /* Add margin below the table */
+    }
+
+    .text-right .btn-success {
+        width: 100%; /* Full width for mobile */
+    }
+}
+
+/* Adjust table cell alignment and wrapping */
+.table th, .table td {
+    vertical-align: middle;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* Fix button alignment */
+.btn-danger {
+    display: inline-block;
+    margin: 0;
+}
+
+/* Analytics Section Styles */
+.analytics-box {
+    background-color: var(--box-bg-color);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    border: 1px solid var(--primary-color) !important; /* Ensure border visibility with !important */
+}
+
+    .analytics-box h2 {
+        color: var(--palette-blue);
+        margin-bottom: 1rem; /* Adds space below the heading */
+    }
+
+    .analytics-box canvas {
+        margin-bottom: 2rem; /* Adds more space below the chart */
+    }
+
+    .analytics-box p {
+        margin-top: 1rem; /* Adds space above the description */
+        margin-bottom: 2rem; /* Adds more space below the description */
+        color: #ffffff; /* Bright white text */
+    }
+
+    .analytics-box table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+    }
+
+        .analytics-box table th, .analytics-box table td {
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+/* Table Styles */
+.table-dark {
+    background-color: var(--box-bg-color);
+    color: var(--text-color);
+    text-align: center;
+    width: 100%;
+}
+
+    .table-dark th, .table-dark td {
+        border: 1px solid var(--text-color);
+    }
+
+    .table-dark th {
+        background-color: var(--bg-color);
+    }
+
+    .table-dark tbody tr:hover {
+        background-color: var(--bg-color);
+    }
+
+/* User Profile Styles */
+.user-profile-box {
+    background-color: var(--box-bg-color);
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+    border: 1px solid var(--primary-color) !important; /* Ensure border visibility with !important */
+}
+
+    .user-profile-box p {
+        color: #ffffff; /* Bright white text */
+    }
+
+/* Logout Button */
+.btn-logout {
+    background-color: #45A29E; /* Same as .btn-success */
+    border-color: #45A29E; /* Same as .btn-success */
+    color: #fff; /* White text color */
+}
+
+    .btn-logout:hover {
+        background-color: #DC3545; /* Red color on hover */
+        border-color: #DC3545; /* Red color on hover */
+    }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .software-item {
+        width: 100%;
+    }
+
+    .cart-container, .analytics-box {
+        padding: 1rem;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .analytics-box table th, .analytics-box table td {
+        white-space: nowrap;
+    }
+}
+
+/* Fix Software Page in Mobile View */
+@media (max-width: 768px) {
+    .software-item {
+        width: 100%; /* Ensure software items take full width in mobile view */
+        margin-bottom: 2rem; /* Add margin-bottom to create gaps between items */
+    }
+
+        .software-item img {
+            max-width: 100%; /* Ensure images fit well */
+        }
+
+    .software-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px; /* Add gap between grid items */
+    }
+}
+
+/* Add Gap Between Boxes in About Us Page */
+.section-margin {
+    margin-bottom: 2rem; /* Add margin-bottom to create gaps between sections */
+}
+
+/* Centering Navbar and Adjusting Margins */
+@media (max-width: 768px) {
+    .navbar-nav {
+        justify-content: center;
+    }
+
+        .navbar-nav .nav-item {
+            margin: 5px 0; /* Adjust as necessary for spacing */
+        }
+}
+
+/* Changing Text Colors */
+.customer-reviews p {
+    color: #ffffff; /* Customer reviews text to bright white */
+}
+
+#about-company p {
+    color: #ffffff; /* About company text to bright white */
+}
+
+#contact-us p:first-of-type {
+    color: #ffffff; /* Contact us intro text to bright white */
+}
+
+.address-text {
+    color: #ffffff; /* Bright white text for address */
+}
+
+/* Adding Spacing Between Images and Text */
+#latest-software img,
+#top-deals img {
+    margin-bottom: 20px;
+}
+
+/* Modal close button */
+.modal-content .close {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    color: var(--palette-blue);
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Card link styling */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+    .card-link:hover {
+        text-decoration: none;
+    }
+
+/* Adjust spacing between latest software and top deals */
+#latest-software, #top-deals {
+    margin-right: 2rem;
+}
+
+    #latest-software + #top-deals {
+        margin-left: 0;
+    }
+
+/* Remove borders for main content on all pages */
+main {
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+/* Remove specific border classes for all pages */
+.border-primary, .border {
+    border: none !important;
+}
+
+/* Adjust social icons in contact us section */
+.contact-us-info .social-icons a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.5rem;
+}
+
+    .contact-us-info .social-icons a:hover {
+        color: var(--palette-blue);
+    }
+
+/* Specific Updates */
+.box-gap {
+    margin-bottom: 2rem; /* Gap between boxes */
+    padding: 2rem; /* Padding for the boxes */
+    border: 1px solid var(--primary-color); /* Border color */
+    border-radius: 8px;
+}
+
+.row.section-margin .col-md-5 {
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .row.section-margin .col-md-5 {
+        margin-right: 1rem;
+    }
+}
+
+/* Teal Color Incorporation */
+.btn-primary, .btn-success {
+    background-color: var(--primary-color); /* Teal color */
+    border-color: var(--primary-color); /* Teal color */
+}
+
+    .btn-primary:hover, .btn-success:hover {
+        background-color: #379287; /* Darker teal color on hover */
+        border-color: #379287; /* Darker teal color on hover */
+    }
+
+.card-link:hover {
+    color: var(--primary-color); /* Teal color for card links on hover */
+}
+
+/* Call-to-action buttons */
+.cta-button {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    .cta-button:hover {
+        background-color: #379287; /* Darker teal color on hover */
+        border-color: #379287; /* Darker teal color on hover */
+    }
+
+.centered-text {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
