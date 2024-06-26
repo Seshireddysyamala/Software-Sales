@@ -1,20 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cartTable = document.getElementById('cart-table-body');
-    const cartCountElements = document.querySelectorAll('#cart-count');
+    const cartCountElements = document.querySelectorAll('#cart-count'); // Updated to match multiple elements
     const checkoutButton = document.getElementById('checkout-button');
     const cartTotalContainer = document.getElementById('cart-total-container');
     const emptyCartMessage = document.getElementById('empty-cart-message');
+    const additionalText = document.getElementById('additional-text');
+    const continueShoppingBtn = document.getElementById('continue-shopping-btn');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     const renderCartItems = () => {
         cartTable.innerHTML = '';
         if (cart.length === 0) {
             emptyCartMessage.style.display = 'block';
+            additionalText.style.display = 'block';
+            continueShoppingBtn.style.display = 'block';
             cartTable.parentElement.style.display = 'none';
             checkoutButton.style.display = 'none';
             cartTotalContainer.style.display = 'none';
         } else {
             emptyCartMessage.style.display = 'none';
+            additionalText.style.display = 'none';
+            continueShoppingBtn.style.display = 'none';
             cartTable.parentElement.style.display = 'table';
             checkoutButton.style.display = 'inline-block';
             cartTotalContainer.style.display = 'block';
@@ -40,14 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateCartCount = () => {
-        const itemCount = cart.reduce((count, item) => count + item.quantity, 0);
-        cartCountElements.forEach(el => el.textContent = itemCount);
+        const cartCountElements = document.querySelectorAll('#cart-count');
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCountElements.forEach(el => el.textContent = itemCount); // Updated to handle multiple elements
     };
 
     const calculateTotal = () => {
         let total = 0;
         cart.forEach(item => total += item.price * item.quantity);
         document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+    };
+
+    const removeItemFromCart = (index) => {
+        cart.splice(index, 1);
+        updateCart();
     };
 
     cartTable.addEventListener('click', (event) => {
@@ -77,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             document.getElementById('menu').innerHTML = data;
             checkLoginState();
-            updateCartCount();
+            updateCartCount(); // Ensure this function is called to update the cart count
         })
         .catch(error => console.error('Error loading menu:', error));
 
@@ -118,17 +131,14 @@ function closeModal() {
 function removeItemFromCart(index) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCartItems();
-    updateCartCount();
-    calculateTotal();
+    updateCart();
 }
 
 function updateCartCount() {
-    const cartCountElements = document.querySelectorAll('#cart-count');
+    const cartCountElements = document.querySelectorAll('#cart-count'); // Updated to match multiple elements
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-    cartCountElements.forEach(el => el.textContent = itemCount);
+    cartCountElements.forEach(el => el.textContent = itemCount); // Updated to handle multiple elements
 }
 
 function renderCartItems() {
@@ -137,15 +147,21 @@ function renderCartItems() {
     const cartTableElement = document.getElementById('cart-table');
     const cartTotalContainer = document.getElementById('cart-total-container');
     const emptyCartMessage = document.getElementById('empty-cart-message');
+    const additionalText = document.getElementById('additional-text');
+    const continueShoppingBtn = document.getElementById('continue-shopping-btn');
 
     cartTable.innerHTML = '';
     if (cart.length === 0) {
         emptyCartMessage.style.display = 'block';
+        additionalText.style.display = 'block';
+        continueShoppingBtn.style.display = 'block';
         cartTableElement.style.display = 'none';
         document.getElementById('checkout-button').style.display = 'none';
         cartTotalContainer.style.display = 'none';
     } else {
         emptyCartMessage.style.display = 'none';
+        additionalText.style.display = 'none';
+        continueShoppingBtn.style.display = 'none';
         cartTableElement.style.display = 'table';
         document.getElementById('checkout-button').style.display = 'inline-block';
         cartTotalContainer.style.display = 'block';
@@ -173,5 +189,10 @@ function calculateTotal() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderCartItems();
+    updateCartCount();
+});
+
+// Listen for storage changes and update cart count
+window.addEventListener('storage', () => {
     updateCartCount();
 });
